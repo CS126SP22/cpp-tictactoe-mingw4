@@ -47,17 +47,17 @@ TEST_CASE("Boards in unreachableState, case-insensitive") {
     REQUIRE(Board("x0X0Xx...").EvaluateBoard() == BoardState::UnreachableState);
   }
 
-  SECTION("numX == numO when X has three-in-a-row, horizontally") {
+  SECTION("numX == numO when X has three-in-a-row") {
     REQUIRE(Board("o..XxXoO.").EvaluateBoard() == BoardState::UnreachableState);
   }
 
-  SECTION("numX == numO + 1, when O has three-in-a-row, vertically") {
+  SECTION("numX == numO + 1, when O has three-in-a-column") {
     REQUIRE(Board(".oxxO.xox").EvaluateBoard() == BoardState::UnreachableState);
   }
 }
 
 TEST_CASE("Boards with X wins, case-insensitive") {
-  SECTION("X vertically wins, second-row") {
+  SECTION("X vertically wins, second-column") {
     REQUIRE(Board(".xooX..x.").EvaluateBoard() == BoardState::Xwins);
   }
 
@@ -69,17 +69,17 @@ TEST_CASE("Boards with X wins, case-insensitive") {
     REQUIRE(Board("..xoX.x.o").EvaluateBoard() == BoardState::Xwins);
   }
 
-  SECTION("X has two three-in-a-rows, not in the same direction") {
+  SECTION("X has a three-in-a-row and a three-in-a-column") {
     REQUIRE(Board("xooxooXxx").EvaluateBoard() == BoardState::Xwins);
   }
 
-  SECTION("X has one three-in-a-rows and one-three-in-a-diagonal") {
+  SECTION("X has one three-in-a-column and one-three-in-a-diagonal") {
     REQUIRE(Board("xoxxxoXoo").EvaluateBoard() == BoardState::Xwins);
   }
 }
 
 TEST_CASE("Boards with O wins, case-insensitive") {
-  SECTION("O vertically wins, third row") {
+  SECTION("O vertically wins, third-column") {
     REQUIRE(Board("..Oxxox.o").EvaluateBoard() == BoardState::Owins);
   }
 
