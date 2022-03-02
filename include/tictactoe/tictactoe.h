@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 namespace tictactoe {
 
@@ -40,28 +41,28 @@ class Board {
 
  private:
   /// TODO: add your helper functions and member variables here
-  int dimension_;
+  size_t dimension_;
   std::string board_;
   /**
    * This method should return the result whether certain player fills all positions on a certain row.
    * @param player the checked player in lower case.
    * @return times horizontal conditions for possible wins are reached.
    */
-  int CheckHorizontals(char player);
+  size_t CheckHorizontals(char player) const;
 
   /**
    * This method should return the result whether certain player fills all positions on a certain column.
    * @param player the checked player in lower case.
    * @return times vertical conditions for possible wins are reached.
    */
-  int CheckVerticals(char player);
+  size_t CheckVerticals(char player) const;
 
   /**
    *This method should return the result whether certain player fills all positions on the diagonal.
    * @param player the checked player in lower case.
    * @return times Diagonal condition for possible wins are reached.
    */
-  int CheckDiagonal(char player);
+  size_t CheckDiagonals(char player) const;
 
 };
 
