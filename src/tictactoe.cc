@@ -1,6 +1,7 @@
 #include <stdexcept>
 #include <string>
 #include <stdbool.h>
+#include <iostream>
 
 #include "tictactoe/tictactoe.h"
 
@@ -48,9 +49,9 @@ size_t Board::CheckVerticals(char player) const {
     unified_board.push_back(tolower(board_[i]));
   }
   size_t count = 0;
-  for (int row = 0; row < dimension; row++) {
+  for (size_t column = 0; column < dimension; column++) {
     bool win = true;
-    for (int column = 0; column < dimension; column++) {
+    for (size_t row = 0; row < dimension; row++) {
       if (unified_board[row * dimension + column] != player) {
         win = false;
         break;
@@ -67,14 +68,17 @@ size_t Board::CheckDiagonals(char player) const {
   //Unify the board by changing all characters into lower cases.
   std::string unified_board = "";
   size_t dimension = this->dimension_;
+  for (size_t i = 0; i < board_.length(); i++) {
+    unified_board.push_back(tolower(board_[i]));
+  }
     size_t countRight = 1;
-    for (int column = 0; column < dimension; column++) {
+    for (size_t column = 0; column < dimension; column++) {
       if (unified_board[column * dimension + column] != player) {
         countRight = 0;
       }
     }
     int countLeft = 1;
-    for (int row = dimension_; row > 0; row--) {
+    for (size_t row = dimension; row > 0; row--) {
       if (unified_board[row * dimension - row] != player) {
         countLeft = 0;
       }
@@ -135,12 +139,12 @@ BoardState Board::EvaluateBoard() const {
   }
 
   //Check when numX == numO when X has three-in-a-row/column/diagonal
-  if (xnum == onum && xWinTimes == 1) {
+  if (xnum == onum && xWinTimes >= 1) {
     return BoardState::UnreachableState;
   }
 
   //Check when numX == numO + 1 when O has three-in-a-row/column/diagonal
-  if (xnum == onum + 1 && oWinTimes == 1) {
+  if (xnum == (onum + 1) && oWinTimes >= 1) {
     return BoardState::UnreachableState;
   }
 
