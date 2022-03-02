@@ -134,6 +134,17 @@ BoardState Board::EvaluateBoard() const {
     return BoardState::UnreachableState;
   }
 
+  //Check when numX == numO when X has three-in-a-row/column/diagonal
+  if (xnum == onum && xWinTimes == 1) {
+    return BoardState::UnreachableState;
+  }
+
+  //Check when numX == numO + 1 when O has three-in-a-row/column/diagonal
+  if (xnum == onum + 1 && oWinTimes == 1) {
+    return BoardState::UnreachableState;
+  }
+
+
   //Check if x wins.
   if (CheckDiagonals('x') == 1 || CheckDiagonals('x') == 2 || CheckHorizontals('x') == 1 || CheckVerticals('x') == 1) {
     return BoardState::Xwins;
