@@ -71,16 +71,16 @@ size_t Board::CheckDiagonals(char player) const {
   for (size_t i = 0; i < board_.length(); i++) {
     unified_board.push_back(tolower(board_[i]));
   }
-    size_t countRight = 1;
+    size_t countLeft = 1;
     for (size_t column = 0; column < dimension; column++) {
       if (unified_board[column * dimension + column] != player) {
-        countRight = 0;
+        countLeft = 0;
       }
     }
-    int countLeft = 1;
+    int countRight = 1;
     for (size_t row = dimension; row > 0; row--) {
       if (unified_board[row * dimension - row] != player) {
-        countLeft = 0;
+        countRight = 0;
       }
     }
     return countLeft + countRight;
